@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "c6f5b44a-492c-48c7-8142-4bd79a003f46",
+		"name": "Auto Suggers CHAT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23771894"
+	},
+	"item": [
+		{
+			"name": "Check Sentiment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\":\"Yuor interest rates are too high to take\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/get-sentiment",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"get-sentiment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Chat Reply",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\":\"hi\"\r\n} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/suggestions",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"suggestions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
