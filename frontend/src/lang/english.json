@@ -1,0 +1,11 @@
+{
+    "pages": {
+        "ApiCall": {
+            "title": "User list",
+            "sub_title": "List of all register user",
+            "loading_text": "Loading...",
+            "fetch_user_button": "Fetch Users",
+            "view_button": "View"
+        }
+    }
+}
