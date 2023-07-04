@@ -260,7 +260,8 @@ h2.title1 {
 .chat-desc {
     border: 1px solid #8080805e;
     padding: 10px;
-    border-radius: 12px
+    border-radius: 12px;
+    width: 100%;
 }
 
 .chat-end-btn {

@@ -15,6 +15,7 @@ import { post, get } from "../helper/apiHelper";
 function Home() {
   const [loading, setLoading] = React.useState(false);
   const [chat, setChat] = React.useState(null);
+  const [suggestion, setSuggestion] = React.useState(null);
 
   const fetchAllChat = async () => {
     setLoading(true);
@@ -28,6 +29,7 @@ function Home() {
   }, []);
 
   const sendChat = async (text, role, name) => {
+    setLoading(true);
     const response = await post("/chat", {
       name: name,
       text: text,
@@ -36,6 +38,37 @@ function Home() {
     if (response) {
       fetchAllChat();
     }
+    setLoading(false);
+  };
+
+  React.useEffect(() => {
+    getSuggestion(chat);
+  }, [chat]);
+
+  const getSuggestion = async () => {
+    setLoading(true);
+    let last_chat;
+    if (chat) {
+      const getAlluserChat = chat?.filter((val) => val?.role === "user");
+      if (getAlluserChat?.length > 0)
+        console.log(
+          "------getAlluserChat",
+          getAlluserChat[getAlluserChat?.length - 1]
+        );
+      last_chat = getAlluserChat[getAlluserChat?.length - 1];
+      const response1 = await post("/suggestions", {
+        message: last_chat?.text,
+      });
+      // const response2 = await post("/suggestions", {
+      //   message: last_chat?.text,
+      // });
+
+      const response = [response1];
+
+      setSuggestion(response);
+      console.log("response=====>", response);
+    }
+    setLoading(false);
   };
 
   return (
@@ -51,13 +84,18 @@ function Home() {
         <div className="bdr-hldr bdr-primary w-40">
           <TabHeader />
           <div className="tab-content" id="myTabContent">
-            {chat && <Chat chat={chat} sendChat={sendChat} />}
+            {chat && <Chat chat={chat} sendChat={sendChat} loading={loading} />}
             <Summary />
           </div>
         </div>
         <div className="bdr-hldr bdr-primary w-30 agnt-resp">
           <h2>Agent Responses</h2>
-          <AISuggestion />
+          <AISuggestion
+            suggestion={suggestion}
+            sendChat={sendChat}
+            reGenerate={getSuggestion}
+            loading={loading}
+          />
         </div>
         <CustomerHistory />
       </div>
