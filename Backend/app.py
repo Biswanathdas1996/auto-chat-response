@@ -19,12 +19,12 @@ def add_cors_headers(response):
 
 @app.route('/suggestions', methods=['POST'])
 def suggestions():
-    # data = request.get_json()
-    # client_message = data['message']
-    # reply = utils.generate_massage_reply(client_message)
+    data = request.get_json()
+    client_message = data['message']
+    reply = utils.generate_massage_reply(client_message)
 
-    mock = "This is a mock response"
-    return jsonify({"response": mock}), 200
+    # mock = "This is a mock response"
+    return jsonify({"response": reply}), 200
 
 
 @app.route('/get-sentiment', methods=['POST'])

@@ -20,7 +20,22 @@ const sections = [
   },
 ];
 
-const Chart = ({ NoofSegments, value }) => {
+const Chart = ({ NoofSegments, stntiment }) => {
+  let value;
+  switch (stntiment) {
+    case "Neutral":
+      value = 500;
+      break;
+    case "Negative":
+      value = 300;
+      break;
+    case "Positive":
+      value = 700;
+      break;
+    default:
+      value = 500;
+  }
+
   return (
     <>
       <div className="chart-hldr w-1">

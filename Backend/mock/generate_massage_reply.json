@@ -1,0 +1,19 @@
+{
+    "id": "cmpl-7Yx6DjtMdorrZVQJEAETRuArCugsZ",
+    "object": "text_completion",
+    "created": 1688564685,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": "\n\nThank you for your message. We're sorry to hear about your father's health issues. We offer a variety of products, including health insurance and life insurance, that may be beneficial for your father. Please contact us for more information on how we can help.",
+            "index": 0,
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 121,
+        "completion_tokens": 54,
+        "total_tokens": 175
+    }
+}

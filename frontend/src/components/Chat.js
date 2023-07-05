@@ -6,6 +6,23 @@ import smiley from "../assets/images/smiley.png";
 
 const Chat = ({ chat, sendChat, loading }) => {
   const [text, setText] = React.useState(null);
+  const scrollContainerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (scrollContainerRef.current) {
+      // Scroll to the bottom
+      scrollContainerRef.current.scrollTop =
+        scrollContainerRef.current.scrollHeight;
+    }
+    console.log("------->", scrollContainerRef.current);
+  }, [loading, chat]);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    sendChat(text, "user", "Lisa Smith");
+    setText("");
+  };
+
   return (
     <div
       className="tab-pane fade show active"
@@ -14,15 +31,18 @@ const Chat = ({ chat, sendChat, loading }) => {
       aria-labelledby="home-tab"
     >
       {/* <p className="text-center my-2">Today at 4:30 PM</p> */}
-      {loading ? (
+      {/* {loading ? (
         <div className="chat-hldr">
           <h5>Please Wait...</h5>
         </div>
       ) : (
-        <div className="chat-hldr">
-          {chat &&
-            chat?.map((val, index) => (
-              <div className="chat-usr chat-usr2-hldr">
+        
+      )} */}
+      <div className="chat-hldr" ref={scrollContainerRef}>
+        {chat &&
+          chat?.map((val, index) => (
+            <div className="chat-usr chat-usr2-hldr">
+              {val?.role === "user" && (
                 <div className="chat-img">
                   <img
                     src={val?.role === "user" ? profileImg1 : profileImg2}
@@ -30,35 +50,53 @@ const Chat = ({ chat, sendChat, loading }) => {
                   />
                   <p>{val?.name}</p>
                 </div>
-                <div className="chat-desc">
-                  <p>{val?.text}</p>
-                </div>
+              )}
+
+              <div
+                className="chat-desc"
+                style={val?.role === "admin" ? { background: "#80808026" } : {}}
+              >
+                <p>{val?.text}</p>
               </div>
-            ))}
-        </div>
-      )}
+
+              {val?.role === "admin" && (
+                <div className="chat-img" style={{ marginLeft: 10 }}>
+                  <center>
+                    <img
+                      src={val?.role === "user" ? profileImg1 : profileImg2}
+                      alt=""
+                    />
+                    <p>You</p>
+                  </center>
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
 
       <div>
-        <div className="input-group mb-3 chat-input-hldr">
-          <span className="input-group-text">
+        <div>
+          {/* <span className="input-group-text">
             <img src={smiley} alt="" />
-          </span>
-          <input
-            type="text"
-            className="form-control chat-input"
-            aria-label="Amount (to the nearest dollar)"
-            onChange={(e) => setText(e.target.value)}
-          />
-          <span
-            className="input-group-text"
-            onClick={() => {
-              sendChat(text, "user", "Lisa Smith");
-              setText(null);
-            }}
-            style={{ background: "#e14848" }}
+          </span> */}
+          <form
+            onSubmit={(e) => submitForm(e)}
+            className="input-group chat-input-hldr"
           >
-            <img src={send} alt="" style={{ height: 50, width: 25 }} />
-          </span>
+            <input
+              type="text"
+              className="form-control chat-input"
+              aria-label="Amount (to the nearest dollar)"
+              onChange={(e) => setText(e.target.value)}
+              value={text}
+            />
+            <span
+              className="input-group-text"
+              style={{ background: "#e14848" }}
+            >
+              <img src={send} alt="" style={{ height: 50, width: 25 }} />
+            </span>
+          </form>
         </div>
       </div>
     </div>

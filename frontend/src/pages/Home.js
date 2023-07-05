@@ -16,6 +16,7 @@ function Home() {
   const [loading, setLoading] = React.useState(false);
   const [chat, setChat] = React.useState(null);
   const [suggestion, setSuggestion] = React.useState(null);
+  const [stntiment, setStntiment] = React.useState(null);
 
   const fetchAllChat = async () => {
     setLoading(true);
@@ -59,14 +60,18 @@ function Home() {
       const response1 = await post("/suggestions", {
         message: last_chat?.text,
       });
-      // const response2 = await post("/suggestions", {
-      //   message: last_chat?.text,
-      // });
-
-      const response = [response1];
-
+      const response2 = await post("/suggestions", {
+        message: last_chat?.text,
+      });
+      const response = [response1, response2];
       setSuggestion(response);
-      console.log("response=====>", response);
+      // ----------------------Sentiment-----------------------------------
+      const getSentiment = await post("/get-sentiment", {
+        message: last_chat?.text,
+      });
+      console.log("getSentiment---------", getSentiment);
+      setStntiment(getSentiment?.response);
+      // -------------------------------------------------------------
     }
     setLoading(false);
   };
@@ -76,7 +81,7 @@ function Home() {
       <TopBanner />
       <div className="d-flex justify-content-between gap-3 w-100 mb-4">
         <IntentCharts NoofSegments={5} value={700} />
-        <SentimentChart NoofSegments={5} value={700} />
+        <SentimentChart NoofSegments={5} stntiment={stntiment} />
         <Timer />
         <CustomerDetails />
       </div>
