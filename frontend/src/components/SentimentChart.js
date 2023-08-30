@@ -43,7 +43,7 @@ const Chart = ({ NoofSegments, stntiment }) => {
         <center>
           <ReactSpeedometer
             segments={NoofSegments}
-            width={400}
+            width={300}
             needleHeightRatio={0.7}
             value={value}
             maxSegmentLabels={NoofSegments}

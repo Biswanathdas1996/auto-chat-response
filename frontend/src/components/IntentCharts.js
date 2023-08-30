@@ -35,7 +35,7 @@ const Chart = ({ NoofSegments, value }) => {
         <h2 className="title1">Customer Intent</h2>
         <center>
           <ReactSpeedometer
-            width={400}
+            width={300}
             needleHeightRatio={0.7}
             value={value}
             customSegmentStops={[0, 250, 750, 1000]}

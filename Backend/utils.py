@@ -3,14 +3,24 @@ import env
 import openai
 import mockUtils
 
+import autoprompt
 
 env.addEnv()
+
+
+openai.api_base = os.environ['api_base']
 openai.api_key = os.environ['OPEN_AI_KEY']
+openai.api_type = "azure"
+openai.api_version = os.environ['api_version']
+
+
 useMock = os.environ['USE_MOCK']
 
 
 def generate_massage_reply(message):
 
+    test = autoprompt.myName()
+    print("=================>", test)
     if useMock == "True":
         mockData = mockUtils.mockResponse("generate_massage_reply.json")
         return mockData['choices'][0]['text'].strip()
@@ -24,7 +34,7 @@ def generate_massage_reply(message):
             Message: {message}?"""
 
     response = openai.Completion.create(
-        engine="text-davinci-003",
+        engine="Policy_GPT",
         prompt=prompt,
         max_tokens=100,
         temperature=0.6,
@@ -47,7 +57,7 @@ def get_sentiment(text):
 
     task = "This is a sentiment classification task. Please classify the sentiment of the following text as positive, negative, or neutral:\n\nText: '{}'".format(
         text)
-    response = openai.Completion.create(engine="text-davinci-003",
+    response = openai.Completion.create(engine="Policy_GPT",
                                         prompt=task,
                                         max_tokens=256,
                                         temperature=0,
