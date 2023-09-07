@@ -1,0 +1,73 @@
+{
+    "user": "Sumit Roy",
+    "dob": "22/07/1996",
+    "currency": "INR",
+    "policy": [
+        {
+            "policy_number": "PUB345TY7890",
+            "turm_amount": "5 cr",
+            "policy_name": "Life insurance policy term plan",
+            "total_premium": "12000",
+            "monthly_premium": "1000",
+            "total_premium_paid": "3000",
+            "last_billing_date": "15-08-2023",
+            "next_billing_date": "15-09-2023",
+            "coverage": [
+                {
+                    "covered_person": "Sumit Doe",
+                    "dob": "22/07/1996"
+                },
+                {
+                    "covered_person": "Priti Doe",
+                    "dob": "01/07/1998"
+                }
+            ]
+        },
+        {
+            "policy_number": "PUB34578345",
+            "policy_name": "Max World Basic Health insurance plan",
+            "total_premium": "24000",
+            "monthly_premium": "2000",
+            "total_premium_paid": "6000",
+            "last_billing_date": "15-08-2023",
+            "next_billing_date": "15-09-2023",
+            "coverage": {
+                "room": "Basic double sharing room",
+                "ambulance": "Covered upto 5000 INR",
+                "pre_existing_desiseas": " Will covered after 3 years of onboarding",
+                "accidantal_coverage": "from next day of the onboarding",
+                "terminal_desises": "from next mont of the onboarding",
+                "sum_insured": "5,00,000"
+            },
+            "network_cashless_hospitals": [
+                {
+                    "name": "Woodland multispeciality hospital"
+                },
+                {
+                    "name": "Appolo hospital"
+                },
+                {
+                    "name": "Ruby hospital"
+                },
+                {
+                    "name": "Desean hospital"
+                },
+                {
+                    "name": "RN tegore hospital"
+                }
+            ],
+            "health_issues_covered_under_cashless_claim": [
+                "Heart attack",
+                "Kidny stone",
+                "Brain Tumote",
+                "Blood suger",
+                "Kidny transplant",
+                "Liver issues"
+            ],
+            "contact_person": {
+                "name": "Suman Das",
+                "contact_no": "+91 6003898766"
+            }
+        }
+    ]
+}

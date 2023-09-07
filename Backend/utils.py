@@ -2,7 +2,7 @@ import os
 import env
 import openai
 import mockUtils
-
+import json
 import autoprompt
 
 env.addEnv()
@@ -16,8 +16,85 @@ openai.api_version = os.environ['api_version']
 
 useMock = os.environ['USE_MOCK']
 
+context = {
+    "user": "Sumit Roy",
+    "dob": "22/07/1996",
+    "currency": "INR",
+    "policy": [
+        {
+            "policy_number": "PUB345TY7890",
+            "turm_amount": "5 cr",
+            "policy_name": "Life insurance policy term plan",
+            "total_premium": "12000",
+            "monthly_premium": "1000",
+            "total_premium_paid": "3000",
+            "last_billing_date": "15-08-2023",
+            "next_billing_date": "15-09-2023",
+            "coverage": [
+                {
+                    "covered_person": "Sumit Doe",
+                    "dob": "22/07/1996"
+                },
+                {
+                    "covered_person": "Priti Doe",
+                    "dob": "01/07/1998"
+                }
+            ]
+        },
+        {
+            "policy_number": "PUB34578345",
+            "policy_name": "Max World Basic Health insurance plan",
+            "total_premium": "24000",
+            "monthly_premium": "2000",
+            "total_premium_paid": "6000",
+            "last_billing_date": "15-08-2023",
+            "next_billing_date": "15-09-2023",
+            "coverage": {
+                "room": "Basic double sharing room",
+                "ambulance": "Covered upto 5000 INR",
+                "pre_existing_desiseas": " Will covered after 3 years of onboarding",
+                "accidantal_coverage": "from next day of the onboarding",
+                "terminal_desises": "from next mont of the onboarding",
+                "sum_insured": "5,00,000"
+            },
+            "network_cashless_hospitals": [
+                {
+                    "name": "Woodland multispeciality hospital"
+                },
+                {
+                    "name": "Appolo hospital"
+                },
+                {
+                    "name": "Ruby hospital"
+                },
+                {
+                    "name": "Desean hospital"
+                },
+                {
+                    "name": "RN tegore hospital"
+                }
+            ],
+            "health_issues_covered_under_cashless_claim": [
+                "Heart attack",
+                "Kidny stone",
+                "Brain Tumote",
+                "Blood suger",
+                "Kidny transplant",
+                "Liver issues"
+            ],
+            "contact_person": {
+                "name": "Suman Das",
+                "contact_no": "+91 6003898766"
+            }
+        }
+    ]
+}
+
 
 def generate_massage_reply(message):
+
+    with open('data/chat.json', 'r') as file:
+        chatHistory = json.load(file)
 
     test = autoprompt.myName()
     print("=================>", test)
@@ -25,13 +102,24 @@ def generate_massage_reply(message):
         mockData = mockUtils.mockResponse("generate_massage_reply.json")
         return mockData['choices'][0]['text'].strip()
 
-    context = "We provide lone to customer, having a credit score of more that 500. We offer multiple product including Health insurance, life insureance, car loane , home lone, personal lone, interest rate will depends on the credit score of the customer and can be in betwwen 9-15%."
-    prompt = f"""Use the below article to make a professional, polite,  and positive sentiment and put some empathy to the reply of the Message. Make the english short and convertional"
-            Article:
+    # context = "We provide lone to customer, having a credit score of more that 500. We offer multiple product including Health insurance, life insureance, car loane , home lone, personal lone, interest rate will depends on the credit score of the customer and can be in betwwen 9-15%."
+    prompt = f"""You are a polite insurance guide who will help customer with there policy details.  Your name is Jan"
+            Context:
             \"\"\"
             {context}
             \"\"\"
-            Message: {message}?"""
+            Chat History:
+            \"\"\"
+            {chatHistory}
+            \"\"\"
+            Message: {message}?
+            
+             The following topics must be considered:
+                          - Reply to the answer given
+                          - Provide answer in the context of chat history provided
+                          - if the the question is not from the given context say "I dont know"
+                          - if and data asked out of the dataset say negative and asked him/her to contact customer care
+            """
 
     response = openai.Completion.create(
         engine="Policy_GPT",

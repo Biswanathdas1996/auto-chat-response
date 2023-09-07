@@ -5,8 +5,9 @@ import phone from "../assets/images/phone.svg";
 import smiley from "../assets/images/smiley.png";
 import soundwave from "../assets/images/soundwave.svg";
 import award from "../assets/images/award.png";
+import Details from "./Details";
 
-export default function CustomerHistory() {
+export default function CustomerHistory({ data }) {
   return (
     <div className="w-30">
       <h2 className="title1">Customer History</h2>
@@ -14,30 +15,22 @@ export default function CustomerHistory() {
         <table className="table table-borderless _cust-hist ai-suggest">
           <thead>
             <tr>
-              <th>Insurer</th>
-              <th>Amount</th>
+              <th>Policy</th>
+              <th>Premium</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img src={smiley} alt="" />
-              </td>
-              <td>€ 289.00</td>
-              <td>
-                <button>View Details</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img src={smiley} alt="" />
-              </td>
-              <td>€ 289.00</td>
-              <td>
-                <button>View Details</button>
-              </td>
-            </tr>
+            {data.policy.map((val) => (
+              <tr>
+                <td style={{ fontSize: 14 }}>{val?.policy_name}</td>
+                <td style={{ fontSize: 14 }}>{val?.total_premium} INR</td>
+
+                <td>
+                  <button>View Details</button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -55,6 +48,7 @@ export default function CustomerHistory() {
       </div>
       <div className="tckes-hldr mt-4">
         <h3>Tickets</h3>
+        {/* <Details policy={data.policy[1]} /> */}
         <div className="box-hldr">No older tickets found...</div>
       </div>
     </div>

@@ -9,7 +9,7 @@ import CustomerDetails from "../components/CustomerDetails";
 import CustomerHistory from "../components/CustomerHistory";
 import TabHeader from "../components/TabHeader";
 import Summary from "../components/Summary";
-
+import Policy from "../mock/policy.json";
 import { post, get } from "../helper/apiHelper";
 
 function Home() {
@@ -83,7 +83,7 @@ function Home() {
         <IntentCharts NoofSegments={5} value={700} />
         <SentimentChart NoofSegments={5} stntiment={stntiment} />
         <Timer />
-        <CustomerDetails />
+        <CustomerDetails data={Policy} />
       </div>
       <div className="d-flex justify-content-between gap-3 w-100 mb-3">
         <div className="bdr-hldr bdr-primary w-40">
@@ -102,7 +102,7 @@ function Home() {
             loading={loading}
           />
         </div>
-        <CustomerHistory />
+        <CustomerHistory data={Policy} />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export default function Timer() {
   };
 
   return (
-    <div className="cust-call-dtls bg-hldr w-2">
+    <div className="cust-call-dtls bg-hldr w-2" style={{ height: 220 }}>
       <p>Call Duration</p>
       <p>
         <strong>{formatTime()}</strong>
