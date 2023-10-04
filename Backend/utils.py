@@ -8,10 +8,10 @@ import autoprompt
 env.addEnv()
 
 
-openai.api_base = os.environ['api_base']
-openai.api_key = os.environ['OPEN_AI_KEY']
+openai.api_base = "https://soumenopenai.openai.azure.com"
+openai.api_key = "3a5a6eba4d2546558d3fa749ef9fb5ce"
 openai.api_type = "azure"
-openai.api_version = os.environ['api_version']
+openai.api_version = "2023-03-15-preview"
 
 
 useMock = os.environ['USE_MOCK']

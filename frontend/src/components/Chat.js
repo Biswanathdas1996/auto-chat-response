@@ -19,7 +19,7 @@ const Chat = ({ chat, sendChat, loading }) => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    sendChat(text, "user", "Lisa Smith");
+    sendChat(text, "user", "Sumit");
     setText("");
   };
 
